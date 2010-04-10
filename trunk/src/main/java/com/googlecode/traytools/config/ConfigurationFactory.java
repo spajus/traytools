@@ -83,10 +83,7 @@ public abstract class ConfigurationFactory {
         synchronized (ConfigurationFactory.class) {
             if (concreteInstance == null) {
             	try {
-					concreteInstance = (ConfigurationFactory) Class.forName(
-							Configuration.SETTINGS
-								.getString("configuration.factory.class"))
-								.newInstance();
+					concreteInstance = Configuration.getNewInstance("configuration.factory.class");
 				} catch (final Exception e) {
 					Logger.fatal("Failed loading configuration", e);
 				}
