@@ -51,9 +51,9 @@
               <mainClass>com.googlecode.traytools.main.Application</mainClass>
             </manifest>
           </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
+          <descriptors>
+            <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
+          </descriptors>
         </configuration>
         <executions>
           <execution>
@@ -94,6 +94,7 @@
           <groupId>swt</groupId>
           <version>3.6M6-win32</version>
           <scope>system</scope>
+          <optional>false</optional>
           <systemPath>${basedir}/lib/swt-3.6M6-win32.jar</systemPath>
         </dependency>
       </dependencies>
@@ -112,6 +113,7 @@
           <groupId>swt</groupId>
           <version>3.6M6-gtk-linux-x86</version>
           <scope>system</scope>
+          <optional>false</optional>
           <systemPath>${basedir}/lib/swt-3.6M6-gtk-linux-x86.jar</systemPath>
         </dependency>
       </dependencies>
