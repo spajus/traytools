@@ -20,9 +20,7 @@ package com.googlecode.traytools.config;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import com.googlecode.traytools.utils.Base64;
 import com.googlecode.traytools.utils.Logger;
-import com.googlecode.traytools.utils.RC4Crypt;
 import com.googlecode.traytools.utils.UTF8ResourceBundle;
 
 /**
@@ -85,41 +83,15 @@ public class Configuration {
         return properties;
     }
     
-    /**
-     * Encrypts a password property
-     * 
-     * @param propName
-     * @param pass
-     */
-    public void setPasswordProperty(final String propName, final String pass) {
+    @SuppressWarnings("unchecked")
+	public static <T> T getNewInstance(String propertyName) {
+    	String className = SETTINGS.getString(propertyName);
     	try {
-			getProperties().put(propName, Base64.encodeToString(
-					RC4Crypt.encrypt(pass.getBytes(Constants.ENCODING), 
-					SALT.getBytes(Constants.ENCODING)), false));
+			return (T) Class.forName(className).newInstance();
 		} catch (final Exception e) {
-			Logger.warn("Failed encrypting password property: " + propName);
-			getProperties().put(propName, "");
+			Logger.error("Failed loading class", propertyName, className, e);
+			return null;
 		}
     }
     
-    /**
-     * Decrypts a password property
-     * 
-     * @param propName
-     * @return
-     */
-    public String getPasswordProperty(final String propName) {
-        try {
-			final String prop = properties.get(propName);
-			if (prop == null || prop.equals("")) {
-				return ""; 
-			}
-			return new String(RC4Crypt.decrypt(Base64.decode(prop), 
-					SALT.getBytes(Constants.ENCODING)), Constants.ENCODING);
-		} catch (final Exception e) {
-			Logger.warn("Failed decrypting password property: " + propName);
-			return "";
-		}
-    }
-
 }

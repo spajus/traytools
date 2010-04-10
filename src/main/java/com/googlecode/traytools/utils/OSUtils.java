@@ -21,6 +21,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.traytools.config.Configuration;
+
 /**
  * Operating System specific utilities.
  * 
@@ -73,7 +75,8 @@ public abstract class OSUtils {
 	 */
 	public static int getTrayIconSize() {
 		//experimental
-		if (System.getProperty("java.version").compareTo("1.6") >= 0) {
+		if (System.getProperty("java.version").compareTo("1.6") >= 0 
+				&& Configuration.SETTINGS.getString("guess.tray.icon.size").equals("true")) {
 			try {
 				Logger.debug("Java > 1.6, trying java.awt.SystemTray");
 				final Class<?> systemTrayClass = Class.forName(
