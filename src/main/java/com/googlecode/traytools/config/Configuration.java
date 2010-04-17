@@ -34,14 +34,22 @@ public class Configuration {
     /**
      * Hawkscope properties bundle
      */
-    public static final ResourceBundle SETTINGS = UTF8ResourceBundle
-    		.getBundle("settings", Configuration.class.getClassLoader());
+    public static final ResourceBundle SETTINGS;
     
-    /**
-     * Password salt. Change it for each application!
-     * @see #setSalt(String)
-     */
-    public static String SALT = "mountain rock salt";
+    static {
+    	ResourceBundle settings = null;
+    	try {
+    		settings = UTF8ResourceBundle
+    			.getBundle("traytools", Configuration.class.getClassLoader());
+    	} catch (final Exception e) {
+    		System.err.println("You're almost there! However you should create " +
+    				"traytools.properties and add it " +
+    				"to your application's src/main/resources. Please refer to TrayTools " +
+    				"documentation for further instructions at http://traytools.googlecode.com");
+    		System.exit(-1);
+    	}
+    	SETTINGS = settings;
+    }
     
     /**
      * Properties {@link Map}
@@ -61,10 +69,6 @@ public class Configuration {
      */
     public boolean isChanged() {
         return changed;
-    }
-    
-    public static void setSalt(final String salt) {
-    	SALT = salt;
     }
 
     /**
