@@ -119,5 +119,24 @@
         </dependency>
       </dependencies>
     </profile>
+    <profile>
+      <id>linux64</id>
+      <activation>
+        <os>
+          <family>Linux</family>
+          <arch>amd64</arch>
+        </os>
+      </activation>
+      <dependencies>
+        <dependency>
+          <artifactId>org.eclipse.swt</artifactId>
+          <groupId>swt</groupId>
+          <version>3.6M6-gtk-linux-x86_64</version>
+          <scope>system</scope>
+          <optional>false</optional>
+          <systemPath>${basedir}/lib/swt-3.6M6-gtk-linux-x86_64.jar</systemPath>
+        </dependency>
+      </dependencies>
+    </profile>
   </profiles>
 </project>

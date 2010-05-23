@@ -24,7 +24,7 @@ import com.googlecode.traytools.utils.Logger;
 import com.googlecode.traytools.utils.UTF8ResourceBundle;
 
 /**
- * Hawkscope configuration.
+ * Tray Tools configuration.
  *
  * @author Tomas Varaneckas
  * @version $Id: Configuration.java 591 2009-06-07 15:18:50Z tomas.varaneckas $
